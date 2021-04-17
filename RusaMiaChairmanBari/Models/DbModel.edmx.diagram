@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6d22ba40a854f229095171457306af1" Name="Diagram1">
+        <EntityTypeShape EntityType="RusaMiaBariDBModel.C50TakaData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RusaMiaBariDBModel.Admin_table" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RusaMiaBariDBModel.C100TakaData" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RusaMiaBariDBModel.UserRole" Width="1.5" PointX="5" PointY="4.125" />
+        <AssociationConnector Association="RusaMiaBariDBModel.FK_UserRole_Admin_table" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

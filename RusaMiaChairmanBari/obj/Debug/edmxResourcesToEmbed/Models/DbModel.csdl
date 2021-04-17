@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RusaMiaBariDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C50TakaData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Admin_table">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Admin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserRole" Relationship="RusaMiaBariDBModel.FK_UserRole_Admin_table" FromRole="Admin_table" ToRole="UserRole" />
+  </EntityType>
+  <EntityContainer Name="RusaMiaBariDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C50TakaData" EntityType="Self.C50TakaData" />
+    <EntitySet Name="Admin_table" EntityType="Self.Admin_table" />
+    <EntitySet Name="C100TakaData" EntityType="RusaMiaBariDBModel.C100TakaData" />
+    <EntitySet Name="UserRole" EntityType="RusaMiaBariDBModel.UserRole" />
+    <AssociationSet Name="FK_UserRole_Admin_table" Association="RusaMiaBariDBModel.FK_UserRole_Admin_table">
+      <End Role="Admin_table" EntitySet="Admin_table" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C100TakaData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalMonth" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="NameOfPaidMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Admin_table" Relationship="RusaMiaBariDBModel.FK_UserRole_Admin_table" FromRole="UserRole" ToRole="Admin_table" />
+  </EntityType>
+  <Association Name="FK_UserRole_Admin_table">
+    <End Type="RusaMiaBariDBModel.Admin_table" Role="Admin_table" Multiplicity="1" />
+    <End Type="RusaMiaBariDBModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_table">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<RusaMiaChairmanBari.Models.C50TakaData>
+
+@{
+    var message = ViewBag.SuccessMsg;
+}
+
+<style>
+    #ta {
+        width: 22%;
+    }
+    .abc {
+        padding: 1px 18px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        float: right;
+        font-size: 16px;
+        background: palegreen;
+        font-style: italic;
+        color: black;
+    }
+    .search {
+        font-size: 16px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        padding-right: 11px;
+        margin-right: 6px;
+        background: cornflowerblue;
+        color: white;
+        padding: 1px 18px;
+        font-style: italic;
+    }
+    .lab {
+        font-size: 16px;
+        color: black;
+    }
+    
+    
+</style>
+<h2>Index</h2>
+@if (User.IsInRole("Admin"))
+{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+}
+
+
+@using (Html.BeginForm())
+{
+    <p style="float:right">
+        <label class="lab">Enter Search Name</label>
+        <input type="text" class="search" name="SearchName" id="SearchName" placeholder="Search Name" />
+        @*Name  : @Html.TextBox("SearchName", new { htmlAttributes = new { @class = "search" ,@style = "font-size: 18px" } })<br />*@
+        <input type="submit" value="Search" class="abc"/>
+    </p>
+
+<table class="table table-striped table-bordered ">
+    <tr class="info">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th id="ta"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FatherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @if(User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary", @style = "color:white" })
+                }
+                @if(User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger", @style = "color:white" })
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-default", @style = "color:black" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message) {
+        alert(message);
+    }
+    $.notify(data.message, {
+            globalposition: "top center",
+            className: success,
+        });
+
+</script>
+
+
+@*<script type="text/javascript">
+    $(function () {
+    var msg = '@ViewData["result"]';
+    if (msg == '1')
+    {
+    alert("User Details Inserted Successfully");
+    window.location.href = "@Url.Action("FiftyTakaData", "User")";
+    }
+    });
+    </script>*@

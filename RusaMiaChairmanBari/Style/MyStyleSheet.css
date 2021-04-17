@@ -1,0 +1,21 @@
+﻿body {
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    background-size: cover;
+    background-position: initial;
+}
+
+.login  li a {
+
+    color: #829595;
+    text-decoration: none;
+    float: right;
+    padding-top: 14px;
+    
+}
+
+.login li a:hover{
+   color:white;
+}
+
+
